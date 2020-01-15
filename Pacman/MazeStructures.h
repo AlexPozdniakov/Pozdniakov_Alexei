@@ -32,8 +32,9 @@ enum food : char
 class Cell
 {
   public:
-    food food = food::EMPTY;
-    bool isWall = false;
-    bool isTunnel = false;
-    bool isDoor = false;
+    food food;
+    bool isWall;
+    bool isTunnel;
+    bool isDoor;
+    Cell() : food(food::EMPTY), isWall(false), isTunnel(false), isDoor(false) {}
 };
