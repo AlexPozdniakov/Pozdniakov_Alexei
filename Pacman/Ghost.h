@@ -18,7 +18,7 @@ enum ghost_state
 };
 
 
-class Ghost abstract
+class Ghost
 {
   public:
     Ghost();

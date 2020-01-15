@@ -4,7 +4,7 @@
 using std::string;
 using std::vector;
 
-class GameUI abstract
+class GameUI
 {
   public:
     virtual void setMazeWidthHeight(int width, int height) const = 0;
