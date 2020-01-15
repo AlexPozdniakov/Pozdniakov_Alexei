@@ -15,7 +15,7 @@ class Pacman : public IObserver<direction>
     void setStartPosition();
     void Move();
 
-    void Update(direction eventArgument) override;
+    virtual void Update(direction eventArgument) override;
 
   private:
     Point coordinates_;

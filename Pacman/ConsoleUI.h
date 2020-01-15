@@ -10,10 +10,10 @@ class ConsoleUI : public GameUI
 {
   public:
     ConsoleUI();
-    void setMazeWidthHeight(int width, int height) const override;
+    virtual void setMazeWidthHeight(int width, int height) const override;
 
-    void displayMainMenu(vector<string>& menu, int selectedIndex) const override;
-    void draw(const GameState& gameState) const override;
+    virtual void displayMainMenu(vector<string>& menu, int selectedIndex) const override;
+    virtual void draw(const GameState& gameState) const override;
 
 
   private:
