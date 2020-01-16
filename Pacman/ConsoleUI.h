@@ -38,7 +38,7 @@ class ConsoleUI : public GameUI
     void drawGhosts(const GameState& gameState) const;
     void displayLevelScoreLives(const GameState& gameState) const;
 
-    void setColor(color color) const;
+    inline void setColor(color color) const;
     void displayColoredText(string text, color color) const;
 
     void displayTextByCoordinates(string text, int x, int y) const;

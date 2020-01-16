@@ -77,7 +77,7 @@ void ConsoleUI::displayMainMenu(vector<string>& menu, int selectedIndex) const
 
 
 
-void ConsoleUI::setColor(color color) const
+inline void ConsoleUI::setColor(color color) const
 {
   SetConsoleTextAttribute(hConsole_, color);
 }
