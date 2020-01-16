@@ -35,7 +35,6 @@ Game::Game()
   selectedMenuItem_ = main_menu_options::START_GAME;
 
   changedPacmanDirectionEvent_.subscribe(&gameState_->pacman_);
-  changedPacmanDirectionEvent_.subscribe(&gameState_->pacman_);
 }
 
 
