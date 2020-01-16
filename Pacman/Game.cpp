@@ -20,10 +20,10 @@ enum key : unsigned char
 
 
 
-Game::Game()
+Game::Game(GameUI* gameUI)
 {
   gameState_ = new GameState();
-  gameUI_ = new ConsoleUI();
+  gameUI_ = gameUI;
   isPaused_ = false;
 
   int width = gameState_->getMaze()->getColumns();

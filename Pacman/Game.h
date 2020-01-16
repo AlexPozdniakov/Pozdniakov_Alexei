@@ -20,7 +20,7 @@ enum main_menu_options : char
 class Game
 {
   public:
-    Game();
+    Game(GameUI* gameUI);
     ~Game();
 
     void run();
