@@ -22,7 +22,7 @@ class Ghost
 {
   public:
     Ghost();
-    ~Ghost();
+    virtual ~Ghost();
 
     virtual void setStartPosition() = 0;
 

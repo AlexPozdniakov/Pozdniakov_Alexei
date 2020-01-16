@@ -7,6 +7,7 @@ using std::vector;
 class GameUI
 {
   public:
+    virtual ~GameUI() {}
     virtual void setMazeWidthHeight(int width, int height) const = 0;
     virtual void displayMainMenu(vector<string>& menu, int selectedIndex) const = 0;
     // virtual void displayHighScores() = 0;
