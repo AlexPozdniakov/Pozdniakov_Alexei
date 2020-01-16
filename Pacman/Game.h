@@ -37,7 +37,7 @@ class Game
 
     Event<direction> changedPacmanDirectionEvent;
 
-    void handleSelectedMenuItem(int menuItemIndex);
+    void handleSelectedMenuItem(const int menuItemIndex);
     void handlePacmanControl();
 };
 

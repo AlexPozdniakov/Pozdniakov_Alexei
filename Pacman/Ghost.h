@@ -26,12 +26,12 @@ class Ghost
 
     virtual void setStartPosition() = 0;
 
-    Point getCoordinates() const;
-    direction getDirection() const;
-    ghost_type getGhostType() const;
-    ghost_state getGhostState() const;
-    bool isFrightened() const;
-    bool isEye() const;
+    const Point getCoordinates() const;
+    const direction getDirection() const;
+    const ghost_type getGhostType() const;
+    const ghost_state getGhostState() const;
+    const bool isFrightened() const;
+    const bool isEye() const;
 
 
   private:

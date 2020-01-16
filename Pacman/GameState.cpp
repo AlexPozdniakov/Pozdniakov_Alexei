@@ -23,7 +23,7 @@ GameState::~GameState()
 
 
 
-bool GameState::isCellFree(const Point& cellPoint) const
+const bool GameState::isCellFree(const Point& cellPoint) const
 {
   bool isCellInRange = maze_->isCellInRange(cellPoint);
   if (isCellInRange) {
@@ -37,7 +37,7 @@ bool GameState::isCellFree(const Point& cellPoint) const
 
 
 
-bool GameState::isAjacentCellFree(const Point& cell, direction direction) const
+const bool GameState::isAjacentCellFree(const Point& cell, direction direction) const
 {
   Point nextPoint = getAdjacentCell(cell, direction);
   return isCellFree(nextPoint);
@@ -45,7 +45,7 @@ bool GameState::isAjacentCellFree(const Point& cell, direction direction) const
 
 
 
-Point GameState::getAdjacentCell(const Point& cell, direction direction) const
+const Point GameState::getAdjacentCell(const Point& cell, direction direction) const
 {
   Point nextPoint = cell;
   switch (direction) {
@@ -90,21 +90,21 @@ const Maze* GameState::getMaze() const
 
 
 
-int GameState::getScore() const
+const int GameState::getScore() const
 {
   return score_;
 }
 
 
 
-int GameState::getLives() const
+const int GameState::getLives() const
 {
   return lives_;
 }
 
 
 
-int GameState::getLevel() const
+const int GameState::getLevel() const
 {
   return level_;
 }

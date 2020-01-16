@@ -11,7 +11,7 @@ class Maze
     const int getColumns() const;
     const int getRows() const;
 
-    inline bool isCellInRange(const Point& point) const;
+    const inline bool isCellInRange(const Point& point) const;
 
   private:
     Cell** cells_;

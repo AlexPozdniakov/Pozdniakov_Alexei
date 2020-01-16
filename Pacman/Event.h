@@ -9,7 +9,7 @@ class Event
   public:
     void Attach(IObserver<T>* observer);
     void Detach(IObserver<T>* observer);
-    void Notify(T eventArgument);
+    void Notify(const T eventArgument) const;
 
   private:
     vector<IObserver<T>*> eventObservers_;
@@ -38,7 +38,7 @@ void Event<T>::Detach(IObserver<T>* observer)
 
 
 template <class T>
-void Event<T>::Notify(T eventArgument)
+void Event<T>::Notify(const T eventArgument) const
 {
   for (IObserver<T>* obs : eventObservers_) {
     if(obs != nullptr)

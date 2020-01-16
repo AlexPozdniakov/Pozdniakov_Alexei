@@ -7,20 +7,20 @@ class GameState;
 class Pacman : public IObserver<direction>
 {
   public:
-    Pacman(GameState& gameState);
+    Pacman(const GameState& gameState);
 
-    Point getCoordinates() const;
-    direction getDirection() const;
+    const Point getCoordinates() const;
+    const direction getDirection() const;
 
     void setStartPosition();
     void Move();
 
-    virtual void Update(direction eventArgument) override;
+    virtual void Update(const direction eventArgument) override;
 
   private:
     Point coordinates_;
     direction direction_;
 
-    GameState& gameState_;
+    const GameState& gameState_;
 };
 

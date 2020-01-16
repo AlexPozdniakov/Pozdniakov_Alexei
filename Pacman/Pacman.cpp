@@ -2,7 +2,7 @@
 #include "GameState.h"
 
 
-Pacman::Pacman(GameState& gameState) : gameState_(gameState)
+Pacman::Pacman(const GameState& gameState) : gameState_(gameState)
 {
   coordinates_.x = 0;
   coordinates_.y = 0;
@@ -30,7 +30,7 @@ void Pacman::Move()
 
 
 
-void Pacman::Update(direction eventArgument)
+void Pacman::Update(const direction eventArgument)
 {
   bool isAjacentCellFree = gameState_.isAjacentCellFree(coordinates_, eventArgument);
   if (isAjacentCellFree) {
@@ -40,14 +40,14 @@ void Pacman::Update(direction eventArgument)
 
 
 
-Point Pacman::getCoordinates() const
+const Point Pacman::getCoordinates() const
 {
   return coordinates_;
 }
 
 
 
-direction Pacman::getDirection() const
+const direction Pacman::getDirection() const
 {
   return direction_;
 }

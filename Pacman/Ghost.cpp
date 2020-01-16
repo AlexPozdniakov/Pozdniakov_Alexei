@@ -13,42 +13,42 @@ Ghost::~Ghost()
 
 
 
-Point Ghost::getCoordinates() const
+const Point Ghost::getCoordinates() const
 {
   return coordinates_;
 }
 
 
 
-direction Ghost::getDirection() const
+const direction Ghost::getDirection() const
 {
   return direction_;
 }
 
 
 
-ghost_type Ghost::getGhostType() const
+const ghost_type Ghost::getGhostType() const
 {
   return ghostType_;
 }
 
 
 
-ghost_state Ghost::getGhostState() const
+const ghost_state Ghost::getGhostState() const
 {
   return ghostState_;
 }
 
 
 
-bool Ghost::isFrightened() const
+const bool Ghost::isFrightened() const
 {
   return isFrightened_;
 }
 
 
 
-bool Ghost::isEye() const
+const bool Ghost::isEye() const
 {
   return isEye_;
 }

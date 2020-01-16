@@ -126,7 +126,7 @@ const Cell Maze::getCell(const Point& point) const
 
 
 
-inline bool Maze::isCellInRange(const Point& point) const
+const inline bool Maze::isCellInRange(const Point& point) const
 {
   return (point.x >= 0 && point.x < columns_ &&
     point.y >= 0 && point.y < rows_);

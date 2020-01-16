@@ -14,13 +14,13 @@ class GameState
     const Point getPacmanPosition() const;
     void setPacmanStartPosition();
 
-    int getScore() const;
-    int getLives() const;
-    int getLevel() const;
+    const int getScore() const;
+    const int getLives() const;
+    const int getLevel() const;
 
-    bool isCellFree(const Point& cell) const;
-    bool isAjacentCellFree(const Point& cell, direction direction) const;
-    Point getAdjacentCell(const Point& cell, direction direction) const;
+    const bool isCellFree(const Point& cell) const;
+    const bool isAjacentCellFree(const Point& cell, direction direction) const;
+    const Point getAdjacentCell(const Point& cell, direction direction) const;
 
     friend Game;
 

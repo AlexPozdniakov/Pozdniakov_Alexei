@@ -126,7 +126,7 @@ void Game::mainMenu()
 
 
 
-void Game::handleSelectedMenuItem(int menuItemIndex)
+void Game::handleSelectedMenuItem(const int menuItemIndex)
 {
   main_menu_options selectedOption = static_cast<main_menu_options>(menuItemIndex);
   switch (selectedOption) {

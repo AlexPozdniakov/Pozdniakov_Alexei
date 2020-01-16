@@ -4,5 +4,5 @@ template <class T>
 class IObserver
 {
   public:
-    virtual void Update(T) = 0;
+    virtual void Update(const T) = 0;
 };
