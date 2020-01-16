@@ -35,7 +35,7 @@ class Game
     vector<string> menuItems_;
     int selectedMenuItem_;
 
-    Event<direction> changedPacmanDirectionEvent;
+    Event<direction> changedPacmanDirectionEvent_;
 
     void handleSelectedMenuItem(const int menuItemIndex);
     void handlePacmanControl();

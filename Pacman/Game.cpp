@@ -34,8 +34,8 @@ Game::Game()
   menuItems_ = { "Start game", "High scores", "Exit" };
   selectedMenuItem_ = main_menu_options::START_GAME;
 
-  changedPacmanDirectionEvent.Attach(&gameState_->pacman_);
-  changedPacmanDirectionEvent.Attach(&gameState_->pacman_);
+  changedPacmanDirectionEvent_.subscribe(&gameState_->pacman_);
+  changedPacmanDirectionEvent_.subscribe(&gameState_->pacman_);
 }
 
 
@@ -43,7 +43,7 @@ Game::Game()
 Game::~Game()
 {
   if (gameState_ != nullptr) {
-    changedPacmanDirectionEvent.Detach(&gameState_->pacman_);
+    changedPacmanDirectionEvent_.unSubscribe(&gameState_->pacman_);
     delete gameState_;
     gameState_ = nullptr;
   }
@@ -152,7 +152,7 @@ void Game::startGame()
 
 
   while(true) {
-    gameState_->pacman_.Move();
+    gameState_->pacman_.move();
     gameUI_->draw(*gameState_);
     std::this_thread::sleep_for(200ms);
   }
@@ -169,22 +169,22 @@ void Game::handlePacmanControl()
     switch (keypressed) {
       case 'w':
       case 'W':
-        changedPacmanDirectionEvent.Notify(direction::UP);
+        changedPacmanDirectionEvent_.notify(direction::UP);
         break;
 
       case 's':
       case 'S':
-        changedPacmanDirectionEvent.Notify(direction::DOWN);
+        changedPacmanDirectionEvent_.notify(direction::DOWN);
         break;
 
       case 'a':
       case 'A':
-        changedPacmanDirectionEvent.Notify(direction::LEFT);
+        changedPacmanDirectionEvent_.notify(direction::LEFT);
         break;
 
       case 'd':
       case 'D':
-        changedPacmanDirectionEvent.Notify(direction::RIGHT);
+        changedPacmanDirectionEvent_.notify(direction::RIGHT);
         break;
 
       case 'p':

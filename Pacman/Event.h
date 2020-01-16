@@ -7,9 +7,9 @@ template <class T>
 class Event
 {
   public:
-    void Attach(IObserver<T>* observer);
-    void Detach(IObserver<T>* observer);
-    void Notify(const T eventArgument) const;
+    void subscribe(IObserver<T>* observer);
+    void unSubscribe(IObserver<T>* observer);
+    void notify(const T eventArgument) const;
 
   private:
     vector<IObserver<T>*> eventObservers_;
@@ -18,7 +18,7 @@ class Event
 
 
 template <class T>
-void Event<T>::Attach(IObserver<T>* observer)
+void Event<T>::subscribe(IObserver<T>* observer)
 {
   auto iter = find(eventObservers_.begin(), eventObservers_.end(), observer);
   if (iter == eventObservers_.end())
@@ -28,7 +28,7 @@ void Event<T>::Attach(IObserver<T>* observer)
 
 
 template <class T>
-void Event<T>::Detach(IObserver<T>* observer)
+void Event<T>::unSubscribe(IObserver<T>* observer)
 {
   auto iter = find(eventObservers_.begin(), eventObservers_.end(), observer);
   if (iter != eventObservers_.end())
@@ -38,10 +38,10 @@ void Event<T>::Detach(IObserver<T>* observer)
 
 
 template <class T>
-void Event<T>::Notify(const T eventArgument) const
+void Event<T>::notify(const T eventArgument) const
 {
   for (IObserver<T>* obs : eventObservers_) {
     if(obs != nullptr)
-      obs->Update(eventArgument);
+      obs->update(eventArgument);
   }
 }

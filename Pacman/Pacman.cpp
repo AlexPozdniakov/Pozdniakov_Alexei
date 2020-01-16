@@ -20,7 +20,7 @@ void Pacman::setStartPosition()
 
 
 
-void Pacman::Move()
+void Pacman::move()
 {
   bool isAjacentCellFree = gameState_.isAjacentCellFree(coordinates_, direction_);
   if (isAjacentCellFree) {
@@ -30,7 +30,7 @@ void Pacman::Move()
 
 
 
-void Pacman::Update(const direction eventArgument)
+void Pacman::update(const direction eventArgument)
 {
   bool isAjacentCellFree = gameState_.isAjacentCellFree(coordinates_, eventArgument);
   if (isAjacentCellFree) {
