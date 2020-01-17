@@ -1,46 +1,50 @@
 #pragma once
 #include "MazeStructures.h"
 
-enum ghost_type
+namespace pacman
 {
-  BLINKY,
-  PINKY,
-  CLYDE,
-  INKY
-};
+
+  enum ghost_type
+  {
+    BLINKY,
+    PINKY,
+    CLYDE,
+    INKY
+  };
 
 
-enum ghost_state
-{
-  CHASE,
-  SCATTER,
-  FRIGHTENED
-};
+  enum ghost_state
+  {
+    CHASE,
+    SCATTER,
+    FRIGHTENED
+  };
 
 
-class Ghost
-{
-  public:
-    Ghost();
-    virtual ~Ghost();
+  class Ghost
+  {
+    public:
+      Ghost();
+      virtual ~Ghost();
 
-    virtual void setStartPosition() = 0;
+      virtual void setStartPosition() = 0;
 
-    const Point getCoordinates() const;
-    const direction getDirection() const;
-    const ghost_type getGhostType() const;
-    const ghost_state getGhostState() const;
-    const bool isFrightened() const;
-    const bool isEye() const;
+      const Point getCoordinates() const;
+      const direction getDirection() const;
+      const ghost_type getGhostType() const;
+      const ghost_state getGhostState() const;
+      const bool isFrightened() const;
+      const bool isEye() const;
 
 
-  private:
-    Point coordinates_;
-    direction direction_;
-    ghost_type ghostType_;
-    ghost_state ghostState_;
-    bool isFrightened_;
-    bool isEye_;
+    private:
+      Point coordinates_;
+      direction direction_;
+      ghost_type ghostType_;
+      ghost_state ghostState_;
+      bool isFrightened_;
+      bool isEye_;
 
-};
+  };
 
+}

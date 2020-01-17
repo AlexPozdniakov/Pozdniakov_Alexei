@@ -3,6 +3,7 @@
 #include <exception>
 #include "Game.h"
 using std::exception;
+using namespace pacman;
 
 int main()
 {

@@ -8,41 +8,44 @@ using std::vector;
 using std::string;
 class GameUI;
 
-
-enum main_menu_options : char
+namespace pacman
 {
-  START_GAME,
-  HIGH_SCORES,
-  EXIT
-};
+
+  enum main_menu_options : char
+  {
+    START_GAME,
+    HIGH_SCORES,
+    EXIT
+  };
 
 
-class Game
-{
-  public:
-    Game(GameUI* gameUI);
-    ~Game();
+  class Game
+  {
+    public:
+      Game(GameUI* gameUI);
+      ~Game();
 
-    void run();
-    void mainMenu();
-    void startGame();
+      void run();
+      void mainMenu();
+      void startGame();
 
-  private:
-    GameState* gameState_;
-    GameUI* gameUI_;
-    bool isPaused_;
+    private:
+      GameState* gameState_;
+      GameUI* gameUI_;
+      bool isPaused_;
 
-    int pointsForDot_;
-    int pointsForEnergizer_;
+      int pointsForDot_;
+      int pointsForEnergizer_;
 
-    vector<string> menuItems_;
-    int selectedMenuItem_;
+      vector<string> menuItems_;
+      int selectedMenuItem_;
 
-    Event<direction> changedPacmanDirectionEvent_;
+      Event<direction> changedPacmanDirectionEvent_;
 
-    void handleSelectedMenuItem(const int menuItemIndex);
-    void handlePacmanControl();
+      void handleSelectedMenuItem(const int menuItemIndex);
+      void handlePacmanControl();
 
-    void eatFood();
-};
+      void eatFood();
+  };
 
+}

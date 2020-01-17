@@ -1,9 +1,14 @@
 #pragma once
 
-template <class T>
-class IObserver
+namespace pacman
 {
-  public:
-    virtual ~IObserver() {}
-    virtual void update(const T) = 0;
-};
+
+  template <class T>
+  class IObserver
+  {
+    public:
+      virtual ~IObserver() {}
+      virtual void update(const T) = 0;
+  };
+
+}

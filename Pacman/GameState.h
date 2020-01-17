@@ -2,40 +2,44 @@
 #include "Maze.h"
 #include "Pacman.h"
 
-class Game;
-
-class GameState
+namespace pacman
 {
-  public:
-    GameState();
-    ~GameState();
 
-    const Maze* getMaze() const;
-    const Point getPacmanPosition() const;
-    void setPacmanStartPosition();
+  class Game;
 
-    const int getScore() const;
-    const int getLives() const;
-    const int getLevel() const;
+  class GameState
+  {
+    public:
+      GameState();
+      ~GameState();
 
-    void setFood(const Point cell, food food);
+      const Maze* getMaze() const;
+      const Point getPacmanPosition() const;
+      void setPacmanStartPosition();
 
-    const bool isCellFree(const Point& cell) const;
-    const bool isPossibleMove(const Point& cell, direction direction) const;
-    const Point getNextMovePoint(const Point& cell, direction direction) const;
+      const int getScore() const;
+      const int getLives() const;
+      const int getLevel() const;
 
-    friend Game;
+      void setFood(const Point cell, food food);
 
-  private:
-    Maze* maze_;
-    Pacman pacman_; 
+      const bool isCellFree(const Point& cell) const;
+      const bool isPossibleMove(const Point& cell, direction direction) const;
+      const Point getNextMovePoint(const Point& cell, direction direction) const;
 
-    int score_;
-    int lives_;
-    int level_;
+      friend Game;
 
-    const bool isAjacentCellFree(const Point& cell, direction direction) const;
-    const Point getAdjacentCell(const Point& cell, direction direction) const;
-    const bool isPossibleMoveThroughTunnel(const Point& cell, direction direction) const;
-};
+    private:
+      Maze* maze_;
+      Pacman pacman_;
 
+      int score_;
+      int lives_;
+      int level_;
+
+      const bool isAjacentCellFree(const Point& cell, direction direction) const;
+      const Point getAdjacentCell(const Point& cell, direction direction) const;
+      const bool isPossibleMoveThroughTunnel(const Point& cell, direction direction) const;
+  };
+
+}

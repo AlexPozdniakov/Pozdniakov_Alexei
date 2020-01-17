@@ -2,25 +2,29 @@
 #include "MazeStructures.h"
 #include "IObserver.h"
 
-class GameState;
-
-class Pacman : public IObserver<direction>
+namespace pacman
 {
-  public:
-    Pacman(const GameState& gameState);
 
-    const Point getCoordinates() const;
-    const direction getDirection() const;
+  class GameState;
 
-    void setStartPosition();
-    void move();
+  class Pacman : public IObserver<direction>
+  {
+    public:
+      Pacman(const GameState& gameState);
 
-    virtual void update(const direction eventArgument) override;
+      const Point getCoordinates() const;
+      const direction getDirection() const;
 
-  private:
-    Point coordinates_;
-    direction direction_;
+      void setStartPosition();
+      void move();
 
-    const GameState& gameState_;
-};
+      virtual void update(const direction eventArgument) override;
 
+    private:
+      Point coordinates_;
+      direction direction_;
+
+      const GameState& gameState_;
+  };
+
+}
