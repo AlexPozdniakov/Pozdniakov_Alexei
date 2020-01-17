@@ -147,6 +147,17 @@ namespace pacman
         gameState_->pacman_.move();
         eatFood();
 
+        if (gameState_->isLevelComplete()) {
+          isPaused_ = true;
+          if (gameState_->getLevel() > 255) {
+            // game over. save score
+          }
+          else {
+            gameState_->setPacmanStartPosition();
+            gameState_->resetFood();
+          }
+        }
+
         gameUI_->draw(*gameState_);
       }
       std::this_thread::sleep_for(200ms);

@@ -114,6 +114,17 @@ namespace pacman
 
 
 
+  const bool GameState::isLevelComplete()
+  {
+    bool isLevelComplete = !(maze_->isThereAnyFood());
+    if (isLevelComplete) {
+      level_++;
+    }
+    return isLevelComplete;
+  }
+
+
+
   void GameState::setPacmanStartPosition()
   {
     pacman_.setStartPosition();
@@ -159,6 +170,13 @@ namespace pacman
   void GameState::setFood(const Point cell, food food)
   {
     maze_->setFood(cell, food);
+  }
+
+
+
+  void GameState::resetFood()
+  {
+    maze_->resetFood();
   }
 
 }

@@ -117,6 +117,13 @@ namespace pacman
 
 
 
+  void Maze::resetFood()
+  {
+    initStandardMaze();
+  }
+
+
+
   const Cell Maze::getCell(const Point& point) const
   {
     if (isCellInRange(point)) {
@@ -145,6 +152,20 @@ namespace pacman
   {
     return (point.x >= 0 && point.x < columns_ &&
       point.y >= 0 && point.y < rows_);
+  }
+
+
+
+  const bool Maze::isThereAnyFood() const
+  {
+    for (int i = 0; i < rows_; i++) {
+      for (int j = 0; j < columns_; j++) {
+        if (cells_[i][j].food != food::EMPTY) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
 

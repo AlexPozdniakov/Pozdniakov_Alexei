@@ -15,8 +15,10 @@ namespace pacman
       const int getRows() const;
 
       void setFood(const Point cell, food food);
+      void resetFood();
 
       const inline bool isCellInRange(const Point& point) const;
+      const bool isThereAnyFood() const;
 
     private:
       Cell** cells_;

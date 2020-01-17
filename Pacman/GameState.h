@@ -22,10 +22,13 @@ namespace pacman
       const int getLevel() const;
 
       void setFood(const Point cell, food food);
+      void resetFood();
 
       const bool isCellFree(const Point& cell) const;
       const bool isPossibleMove(const Point& cell, direction direction) const;
       const Point getNextMovePoint(const Point& cell, direction direction) const;
+
+      const bool isLevelComplete();
 
       friend Game;
 
