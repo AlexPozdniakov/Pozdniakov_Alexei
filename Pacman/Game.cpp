@@ -24,7 +24,7 @@ Game::Game(GameUI* gameUI)
 {
   gameState_ = new GameState();
   gameUI_ = gameUI;
-  isPaused_ = false;
+  isPaused_ = true;
 
   int width = gameState_->getMaze()->getColumns();
   int height = gameState_->getMaze()->getRows();
@@ -149,10 +149,13 @@ void Game::startGame()
 {
   thread inputThread(&Game::handlePacmanControl, this);
 
+  gameUI_->draw(*gameState_);
 
   while(true) {
-    gameState_->pacman_.move();
-    gameUI_->draw(*gameState_);
+    if (!isPaused_) {
+      gameState_->pacman_.move();
+      gameUI_->draw(*gameState_);
+    }
     std::this_thread::sleep_for(200ms);
   }
 
@@ -168,27 +171,31 @@ void Game::handlePacmanControl()
     switch (keypressed) {
       case 'w':
       case 'W':
+        isPaused_ = false;
         changedPacmanDirectionEvent_.notify(direction::UP);
         break;
 
       case 's':
       case 'S':
+        isPaused_ = false;
         changedPacmanDirectionEvent_.notify(direction::DOWN);
         break;
 
       case 'a':
       case 'A':
+        isPaused_ = false;
         changedPacmanDirectionEvent_.notify(direction::LEFT);
         break;
 
       case 'd':
       case 'D':
+        isPaused_ = false;
         changedPacmanDirectionEvent_.notify(direction::RIGHT);
         break;
 
       case 'p':
       case 'P':
-
+        isPaused_ = !isPaused_;
         break;
     }
   }
