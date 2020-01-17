@@ -11,6 +11,8 @@ class Maze
     const int getColumns() const;
     const int getRows() const;
 
+    void setFood(const Point cell, food food);
+
     const inline bool isCellInRange(const Point& point) const;
 
   private:

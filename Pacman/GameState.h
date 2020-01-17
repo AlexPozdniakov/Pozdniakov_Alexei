@@ -18,6 +18,8 @@ class GameState
     const int getLives() const;
     const int getLevel() const;
 
+    void setFood(const Point cell, food food);
+
     const bool isCellFree(const Point& cell) const;
     const bool isAjacentCellFree(const Point& cell, direction direction) const;
     const Point getAdjacentCell(const Point& cell, direction direction) const;

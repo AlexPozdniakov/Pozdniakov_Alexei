@@ -126,6 +126,18 @@ const Cell Maze::getCell(const Point& point) const
 
 
 
+void Maze::setFood(const Point cell, food food)
+{
+  if (isCellInRange(cell)) {
+    cells_[cell.y][cell.x].food = food;
+  }
+  else {
+    throw std::exception("wrong point");
+  }
+}
+
+
+
 const inline bool Maze::isCellInRange(const Point& point) const
 {
   return (point.x >= 0 && point.x < columns_ &&

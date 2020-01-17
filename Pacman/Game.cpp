@@ -25,6 +25,8 @@ Game::Game(GameUI* gameUI)
   gameState_ = new GameState();
   gameUI_ = gameUI;
   isPaused_ = true;
+  pointsForDot_ = 10;
+  pointsForEnergizer_ = 50;
 
   int width = gameState_->getMaze()->getColumns();
   int height = gameState_->getMaze()->getRows();
@@ -154,12 +156,36 @@ void Game::startGame()
   while(true) {
     if (!isPaused_) {
       gameState_->pacman_.move();
+      eatFood();
+
       gameUI_->draw(*gameState_);
     }
     std::this_thread::sleep_for(200ms);
   }
 
   inputThread.detach();
+}
+
+
+
+void Game::eatFood()
+{
+  Point packmanPosition = gameState_->getPacmanPosition();
+  Cell cell = gameState_->getMaze()->getCell(packmanPosition);
+
+  if (cell.food != food::EMPTY) {
+    switch (cell.food)
+    {
+      case food::DOT:
+        gameState_->score_ += pointsForDot_;
+        break;
+
+      case food::ENERGIZER:
+        gameState_->score_ += pointsForEnergizer_;
+        break;
+    }
+    gameState_->setFood(packmanPosition, food::EMPTY);
+  }
 }
 
 

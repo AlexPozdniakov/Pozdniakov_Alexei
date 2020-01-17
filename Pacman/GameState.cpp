@@ -108,3 +108,10 @@ const int GameState::getLevel() const
 {
   return level_;
 }
+
+
+
+void GameState::setFood(const Point cell, food food)
+{
+  maze_->setFood(cell, food);
+}

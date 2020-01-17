@@ -32,6 +32,9 @@ class Game
     GameUI* gameUI_;
     bool isPaused_;
 
+    int pointsForDot_;
+    int pointsForEnergizer_;
+
     vector<string> menuItems_;
     int selectedMenuItem_;
 
@@ -39,5 +42,7 @@ class Game
 
     void handleSelectedMenuItem(const int menuItemIndex);
     void handlePacmanControl();
+
+    void eatFood();
 };
 
