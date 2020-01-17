@@ -21,8 +21,8 @@ class GameState
     void setFood(const Point cell, food food);
 
     const bool isCellFree(const Point& cell) const;
-    const bool isAjacentCellFree(const Point& cell, direction direction) const;
-    const Point getAdjacentCell(const Point& cell, direction direction) const;
+    const bool isPossibleMove(const Point& cell, direction direction) const;
+    const Point getNextMovePoint(const Point& cell, direction direction) const;
 
     friend Game;
 
@@ -34,5 +34,8 @@ class GameState
     int lives_;
     int level_;
 
+    const bool isAjacentCellFree(const Point& cell, direction direction) const;
+    const Point getAdjacentCell(const Point& cell, direction direction) const;
+    const bool isPossibleMoveThroughTunnel(const Point& cell, direction direction) const;
 };
 

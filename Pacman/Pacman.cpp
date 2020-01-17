@@ -22,9 +22,9 @@ void Pacman::setStartPosition()
 
 void Pacman::move()
 {
-  bool isAjacentCellFree = gameState_.isAjacentCellFree(coordinates_, direction_);
-  if (isAjacentCellFree) {
-    coordinates_ = gameState_.getAdjacentCell(coordinates_, direction_);
+  bool isPossibleMove = gameState_.isPossibleMove(coordinates_, direction_);
+  if (isPossibleMove) {
+    coordinates_ = gameState_.getNextMovePoint(coordinates_, direction_);
   }
 }
 
@@ -32,8 +32,8 @@ void Pacman::move()
 
 void Pacman::update(const direction eventArgument)
 {
-  bool isAjacentCellFree = gameState_.isAjacentCellFree(coordinates_, eventArgument);
-  if (isAjacentCellFree) {
+  bool isPossibleMove = gameState_.isPossibleMove(coordinates_, eventArgument);
+  if (isPossibleMove) {
     direction_ = eventArgument;
   }
 }

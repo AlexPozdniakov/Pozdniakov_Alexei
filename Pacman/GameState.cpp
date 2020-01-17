@@ -69,6 +69,49 @@ const Point GameState::getAdjacentCell(const Point& cell, direction direction) c
 
 
 
+const bool GameState::isPossibleMoveThroughTunnel(const Point& cell, direction direction) const
+{
+  Cell startingCell = maze_->getCell(cell);
+
+  if (startingCell.isTunnel == false) {
+    return false;
+  }
+  int columns = maze_->getColumns();
+  bool canMoveLeft = direction == direction::LEFT && cell.x == 0;
+  bool canMoveRight = direction == direction::RIGHT && cell.x == columns - 1;
+
+  return canMoveLeft || canMoveRight;
+}
+
+
+
+const bool GameState::isPossibleMove(const Point& cell, direction direction) const
+{
+  return (isPossibleMoveThroughTunnel(cell, direction) || isAjacentCellFree(cell, direction));
+}
+
+
+
+const Point GameState::getNextMovePoint(const Point& cell, direction direction) const
+{
+  if (isPossibleMoveThroughTunnel(cell, direction)) {
+    Point nextPoint = cell;
+    if (direction == direction::LEFT) {
+      int columns = maze_->getColumns();
+      nextPoint.x = columns - 1;
+    }
+    else if (direction == direction::RIGHT) {
+      nextPoint.x = 0;
+    }
+    return nextPoint;
+  }
+  else {
+    return getAdjacentCell(cell, direction);
+  }
+}
+
+
+
 void GameState::setPacmanStartPosition()
 {
   pacman_.setStartPosition();
