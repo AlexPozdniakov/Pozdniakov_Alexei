@@ -180,8 +180,8 @@ namespace pacman
 
   void Game::eatFood()
   {
-    Point packmanPosition = gameState_->getPacmanPosition();
-    Cell cell = gameState_->getMaze()->getCell(packmanPosition);
+    Point pacmanPosition = gameState_->getPacmanPosition();
+    Cell cell = gameState_->getMaze()->getCell(pacmanPosition);
 
     if (cell.food != food::EMPTY) {
       switch (cell.food)
@@ -194,7 +194,7 @@ namespace pacman
           gameState_->score_ += pointsForEnergizer_;
           break;
       }
-      gameState_->setFood(packmanPosition, food::EMPTY);
+      gameState_->setFood(pacmanPosition, food::EMPTY);
     }
   }
 

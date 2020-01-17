@@ -206,7 +206,7 @@ namespace pacman
 
   void ConsoleUI::displayLives(const GameState& gameState) const
   {
-    string lives = "Lives: " + to_string(gameState.getLives());
+    const string lives = "Lives: " + to_string(gameState.getLives());
     displayTextByCoordinates(lives, 2, 35, color::YELLOW);
   }
 
@@ -214,8 +214,8 @@ namespace pacman
 
   void ConsoleUI::displayLevelScore(const GameState& gameState) const
   {
-    string score = "Score: " + to_string(gameState.getScore());
-    string level = "Level " + to_string(gameState.getLevel());
+    const string score = "Score: " + to_string(gameState.getScore());
+    const string level = "Level " + to_string(gameState.getLevel());
 
     displayTextByCoordinates(level, 15, 0, color::LIGHT_CYAN);
     displayTextByCoordinates(score, 15, 1, color::WHITE);

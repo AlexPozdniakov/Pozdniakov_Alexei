@@ -15,8 +15,11 @@ namespace pacman
 
   void Pacman::setStartPosition()
   {
-    coordinates_.x = 13;
-    coordinates_.y = 26;
+    const int pacmanStartPositionX = 13;
+    const int pacmanStartPositionY = 26;
+
+    coordinates_.x = pacmanStartPositionX;
+    coordinates_.y = pacmanStartPositionY;
     direction_ = direction::NONE;
   }
 
