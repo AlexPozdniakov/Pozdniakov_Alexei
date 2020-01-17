@@ -65,20 +65,27 @@ void Game::run()
 key getPressedKey()
 {
   int pressedKey;
-  while (true) {
+  key returnedKey;
+
+  bool infiniteLoop = true;
+  while (infiniteLoop) {
     pressedKey = _getch();
 
     if (pressedKey == key::ENTER) {
-      return key::ENTER;
+      returnedKey = key::ENTER;
+      infiniteLoop = false;
     }
     else if (pressedKey == key::ESCAPE) {
-      return key::ESCAPE;
+      returnedKey = key::ESCAPE;
+      infiniteLoop = false;
     }
     else if (pressedKey == key::SYMBOL_BEFORE_ARROWS) {
       key arrow = static_cast<key>(_getch());
-      return arrow;
+      returnedKey = arrow;
+      infiniteLoop = false;
     }
   }
+  return returnedKey;
 }
 
 
@@ -91,7 +98,8 @@ void Game::mainMenu()
     throw std::exception("wrong amount of menu items");
   }
 
-  while (true)
+  bool infiniteLoop = true;
+  while (infiniteLoop)
   {
     key pressedKey = getPressedKey();
     switch (pressedKey) {
@@ -118,7 +126,8 @@ void Game::mainMenu()
         break;
 
       case key::ESCAPE:
-        return;
+        infiniteLoop = false;
+        break;
     }
   }
 }
@@ -151,7 +160,8 @@ void Game::startGame()
 
   gameUI_->draw(*gameState_);
 
-  while(true) {
+  bool isGameContinuing = true;
+  while(isGameContinuing) {
     if (!isPaused_) {
       gameState_->pacman_.move();
       eatFood();
