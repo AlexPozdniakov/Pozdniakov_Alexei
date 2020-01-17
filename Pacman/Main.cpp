@@ -1,5 +1,8 @@
+#include <iostream>
+#include <conio.h>
+#include <exception>
 #include "Game.h"
-
+using std::exception;
 
 int main()
 {
@@ -8,7 +11,16 @@ int main()
 
     Game* game = new Game(consoleUI);
     if (game != nullptr) {
-      game->run();
+
+      try {
+        game->run();
+      }
+      catch (exception e) {
+        system("cls");
+        std::cout << e.what() << std::endl;
+        _getch();
+      }
+
       delete game;
     }
     delete consoleUI;
