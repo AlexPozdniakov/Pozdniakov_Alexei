@@ -36,7 +36,8 @@ class ConsoleUI : public GameUI
     void drawMaze(const GameState& gameState) const;
     void drawPacman(const GameState& gameState) const;
     void drawGhosts(const GameState& gameState) const;
-    void displayLevelScoreLives(const GameState& gameState) const;
+    void displayLives(const GameState& gameState) const;
+    void displayLevelScore(const GameState& gameState) const;
 
     inline void setColor(color color) const;
     void displayColoredText(string text, color color) const;

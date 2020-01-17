@@ -113,10 +113,9 @@ void ConsoleUI::displayTextByCoordinates(string text, int x, int y) const
 
 void ConsoleUI::draw(const GameState& gameState) const
 {
-  system("cls");
+  SetConsoleCursorPosition(hConsole_, { 0, 0 });
   drawMaze(gameState);
   drawPacman(gameState);
-  displayLevelScoreLives(gameState);
 }
 
 
@@ -130,12 +129,21 @@ void ConsoleUI::drawMaze(const GameState& gameState) const
   const int rows = maze->getRows();
   const int columns = maze->getColumns();
 
-  string images;
+  const int emptyRows = 3;
+  for (int i = 0; i < emptyRows; i++) {
+    for (int j = 0; j < columns; j++) {
+      displayColoredText(emptyTile_.tile, emptyTile_.color);
+    }
+  }
+  displayLevelScore(gameState);
+
 
   Point pt;
   Cell cell;
 
-  for (int i = 0; i < rows; i++) {
+  SetConsoleCursorPosition(hConsole_, { 0, emptyRows });
+
+  for (int i = emptyRows; i < rows; i++) {
     for (int j = 0; j < columns; j++) {
       pt.y = i;
       pt.x = j;
@@ -171,6 +179,8 @@ void ConsoleUI::drawMaze(const GameState& gameState) const
     }
     //cout << endl;  // not necessary as we set console width height
   }
+
+  displayLives(gameState);
 }
 
 
@@ -192,13 +202,19 @@ void ConsoleUI::drawGhosts(const GameState& gameState) const
 
 
 
-void ConsoleUI::displayLevelScoreLives(const GameState& gameState) const
+void ConsoleUI::displayLives(const GameState& gameState) const
 {
-  string lives = "Lives: " + to_string( gameState.getLives());
+  string lives = "Lives: " + to_string(gameState.getLives());
+  displayTextByCoordinates(lives, 2, 35, color::YELLOW);
+}
+
+
+
+void ConsoleUI::displayLevelScore(const GameState& gameState) const
+{
   string score = "Score: " + to_string(gameState.getScore());
   string level = "Level " + to_string(gameState.getLevel());
 
   displayTextByCoordinates(level, 15, 0, color::LIGHT_CYAN);
   displayTextByCoordinates(score, 15, 1, color::WHITE);
-  displayTextByCoordinates(lives, 2, 35, color::YELLOW);
 }
