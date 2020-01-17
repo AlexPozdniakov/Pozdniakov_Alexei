@@ -2,25 +2,12 @@
 #include <chrono>
 #include <thread>
 #include "Game.h"
+#include "ConsoleKey.h"
 using std::thread;
 using namespace std::chrono_literals;
 
 namespace pacman
 {
-
-  enum key : unsigned char
-  {
-    ARROW_UP = 72,
-    ARROW_DOWN = 80,
-    ARROW_LEFT = 75,
-    ARROW_RIGHT = 77,
-    SYMBOL_BEFORE_ARROWS = 224,
-
-    ENTER = 13,
-    ESCAPE = 27
-  };
-
-
 
   Game::Game(GameUI* gameUI)
   {
@@ -66,28 +53,12 @@ namespace pacman
 
   key getPressedKey()
   {
-    int pressedKey;
-    key returnedKey;
-
-    bool infiniteLoop = true;
-    while (infiniteLoop) {
-      pressedKey = _getch();
-
-      if (pressedKey == key::ENTER) {
-        returnedKey = key::ENTER;
-        infiniteLoop = false;
-      }
-      else if (pressedKey == key::ESCAPE) {
-        returnedKey = key::ESCAPE;
-        infiniteLoop = false;
-      }
-      else if (pressedKey == key::SYMBOL_BEFORE_ARROWS) {
-        key arrow = static_cast<key>(_getch());
-        returnedKey = arrow;
-        infiniteLoop = false;
-      }
+    int pressedKey = _getch();
+    if (pressedKey == key::SYMBOL_BEFORE_ARROWS) {
+      key arrow = static_cast<key>(_getch());
+      return arrow;
     }
-    return returnedKey;
+    return static_cast<key>(pressedKey);
   }
 
 
@@ -106,6 +77,10 @@ namespace pacman
       key pressedKey = getPressedKey();
       switch (pressedKey) {
         case key::ARROW_UP:
+        case key::ENG_W_CAPITAL:
+        case key::ENG_W_LOWERCASE:
+        case key::RUS_W_CAPITAL:
+        case key::RUS_W_LOWERCASE:
           if (selectedMenuItem_ > main_menu_options::START_GAME)
             selectedMenuItem_--;
           else
@@ -115,6 +90,10 @@ namespace pacman
           break;
 
         case key::ARROW_DOWN:
+        case key::ENG_S_CAPITAL:
+        case key::ENG_S_LOWERCASE:
+        case key::RUS_S_CAPITAL:
+        case key::RUS_S_LOWERCASE:
           if (selectedMenuItem_ < main_menu_options::EXIT)
             selectedMenuItem_++;
           else
@@ -203,34 +182,44 @@ namespace pacman
   void Game::handlePacmanControl()
   {
     while (true) {
-      char keypressed = _getch();
+      unsigned char keypressed = _getch();
       switch (keypressed) {
-        case 'w':
-        case 'W':
+        case ENG_W_CAPITAL:
+        case ENG_W_LOWERCASE:
+        case RUS_W_CAPITAL:
+        case RUS_W_LOWERCASE:
           isPaused_ = false;
           changedPacmanDirectionEvent_.notify(direction::UP);
           break;
 
-        case 's':
-        case 'S':
+        case ENG_S_CAPITAL:
+        case ENG_S_LOWERCASE:
+        case RUS_S_CAPITAL:
+        case RUS_S_LOWERCASE:
           isPaused_ = false;
           changedPacmanDirectionEvent_.notify(direction::DOWN);
           break;
 
-        case 'a':
-        case 'A':
+        case ENG_A_CAPITAL:
+        case ENG_A_LOWERCASE:
+        case RUS_A_CAPITAL:
+        case RUS_A_LOWERCASE:
           isPaused_ = false;
           changedPacmanDirectionEvent_.notify(direction::LEFT);
           break;
 
-        case 'd':
-        case 'D':
+        case ENG_D_CAPITAL:
+        case ENG_D_LOWERCASE:
+        case RUS_D_CAPITAL:
+        case RUS_D_LOWERCASE:
           isPaused_ = false;
           changedPacmanDirectionEvent_.notify(direction::RIGHT);
           break;
 
-        case 'p':
-        case 'P':
+        case ENG_P_CAPITAL:
+        case ENG_P_LOWERCASE:
+        case RUS_P_CAPITAL:
+        case RUS_P_LOWERCASE:
           isPaused_ = !isPaused_;
           break;
       }

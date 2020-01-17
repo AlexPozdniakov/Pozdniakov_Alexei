@@ -124,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleColor.h" />
+    <ClInclude Include="ConsoleKey.h" />
     <ClInclude Include="ConsoleTile.h" />
     <ClInclude Include="ConsoleUI.h" />
     <ClInclude Include="Event.h" />
