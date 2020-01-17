@@ -22,8 +22,11 @@ enum key : unsigned char
 
 Game::Game(GameUI* gameUI)
 {
-  gameState_ = new GameState();
+  if (gameUI == nullptr) {
+    exit(0);
+  }
   gameUI_ = gameUI;
+  gameState_ = new GameState();
   isPaused_ = true;
   pointsForDot_ = 10;
   pointsForEnergizer_ = 50;
@@ -47,11 +50,6 @@ Game::~Game()
     changedPacmanDirectionEvent_.unSubscribe(&gameState_->pacman_);
     delete gameState_;
     gameState_ = nullptr;
-  }
-
-  if (gameUI_ != nullptr) {
-    delete gameUI_;
-    gameUI_ = nullptr;
   }
 }
 

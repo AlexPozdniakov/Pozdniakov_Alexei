@@ -21,10 +21,11 @@ Maze::~Maze()
 
     for (int i = 0; i < rows_; i++) {
       if (cells_[i] != nullptr) {
-        delete cells_[i];
+        delete[] cells_[i];
         cells_[i] = nullptr;
       }
     }
+    delete[] cells_;
     cells_ = nullptr;
   }
 }
@@ -34,7 +35,7 @@ Maze::~Maze()
 void Maze::initStandardMaze()
 {
   if (rows_ < 36 || columns_ < 28) {
-    throw new std::exception("wrong row/column size");
+    throw std::exception("wrong row/column size");
   }
 
   char pacmanMap[36][29] = {
