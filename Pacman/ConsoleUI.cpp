@@ -46,9 +46,11 @@ namespace pacman
 
 
 
-  void ConsoleUI::setMazeWidthHeight(int width, int height) const
+  void ConsoleUI::setMazeWidthHeight(int width, int height)
   {
-    COORD crd = { width * 2, height + 1 };
+    consoleWidth_ = width * 2;
+    consoleHeight_ = height + 1;
+    COORD crd = { consoleWidth_, consoleHeight_ };
     SMALL_RECT rect = { 0, 0, crd.X - 1, crd.Y - 1 };
 
     SetConsoleWindowInfo(hConsole_, true, &rect);
@@ -75,6 +77,31 @@ namespace pacman
       else
         displayTextByCoordinates(menu.at(i), x, y, defaultColor_);
     }
+  }
+
+
+
+  void ConsoleUI::displayMessage(string message) const
+  {
+    SetConsoleTextAttribute(hConsole_, BACKGROUND_BLUE | color::YELLOW);
+    
+    SHORT positionX = 0;
+    SHORT positionY = consoleHeight_ / 4;
+    SetConsoleCursorPosition(hConsole_, {positionX, positionY});
+    
+    for (int i = 0; i < 5; i++) {
+      for (int j = 0; j < consoleWidth_; j++) {
+        cout << " ";
+      }
+    }
+
+    positionX = 5;
+    positionY = positionY + 2;
+    SetConsoleCursorPosition(hConsole_, { positionX, positionY });
+    cout << message;
+
+    setColor(defaultColor_);
+    SetConsoleCursorPosition(hConsole_, { 0,0 });
   }
 
 

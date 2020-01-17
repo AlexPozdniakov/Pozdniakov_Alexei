@@ -11,8 +11,9 @@ namespace pacman
   {
     public:
       virtual ~GameUI() {}
-      virtual void setMazeWidthHeight(int width, int height) const = 0;
+      virtual void setMazeWidthHeight(int width, int height) = 0;
       virtual void displayMainMenu(vector<string>& menu, int selectedIndex) const = 0;
+      virtual void displayMessage(string message) const = 0;
       // virtual void displayHighScores() = 0;
       virtual void draw(const GameState& gameState) const = 0;
   };

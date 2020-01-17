@@ -13,15 +13,18 @@ namespace pacman
   {
     public:
       ConsoleUI();
-      virtual void setMazeWidthHeight(int width, int height) const override;
+      virtual void setMazeWidthHeight(int width, int height) override;
 
       virtual void displayMainMenu(vector<string>& menu, int selectedIndex) const override;
+      virtual void displayMessage(string message) const override;
       virtual void draw(const GameState& gameState) const override;
 
 
     private:
       HANDLE hConsole_;
       color defaultColor_;
+      int consoleWidth_;
+      int consoleHeight_;
 
       ConsoleTile pacmanTile_;
       ConsoleTile ghostTile_;

@@ -153,6 +153,10 @@ namespace pacman
             // game over. save score
           }
           else {
+            gameUI_->draw(*gameState_);
+            gameUI_->displayMessage("Level complete!");
+            std::this_thread::sleep_for(2s);
+
             gameState_->setPacmanStartPosition();
             gameState_->resetFood();
           }
