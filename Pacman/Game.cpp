@@ -1,4 +1,5 @@
 #include <conio.h>
+#include <string>
 #include <chrono>
 #include <thread>
 #include "Game.h"
@@ -17,6 +18,8 @@ namespace pacman
     gameUI_ = gameUI;
     gameState_ = new GameState();
     isPaused_ = true;
+    isGameContinuing_ = false;
+    maxLevel_ = 255;
     pointsForDot_ = 10;
     pointsForEnergizer_ = 50;
 
@@ -74,6 +77,7 @@ namespace pacman
     bool infiniteLoop = true;
     while (infiniteLoop)
     {
+      gameUI_->displayMainMenu(menuItems_, selectedMenuItem_);
       key pressedKey = getPressedKey();
       switch (pressedKey) {
         case key::ARROW_UP:
@@ -85,8 +89,6 @@ namespace pacman
             selectedMenuItem_--;
           else
             selectedMenuItem_ = main_menu_options::EXIT;
-
-          gameUI_->displayMainMenu(menuItems_, selectedMenuItem_);
           break;
 
         case key::ARROW_DOWN:
@@ -98,8 +100,6 @@ namespace pacman
             selectedMenuItem_++;
           else
             selectedMenuItem_ = main_menu_options::START_GAME;
-
-          gameUI_->displayMainMenu(menuItems_, selectedMenuItem_);
           break;
 
         case key::ENTER:
@@ -139,18 +139,25 @@ namespace pacman
   {
     thread inputThread(&Game::handlePacmanControl, this);
 
+    gameState_->resetGameState();
+
     gameUI_->draw(*gameState_);
 
-    bool isGameContinuing = true;
-    while(isGameContinuing) {
+    isGameContinuing_ = true;
+    while(isGameContinuing_) {
       if (!isPaused_) {
         gameState_->pacman_.move();
         eatFood();
 
         if (gameState_->isLevelComplete()) {
           isPaused_ = true;
-          if (gameState_->getLevel() > 255) {
-            // game over. save score
+          if (gameState_->getLevel() > maxLevel_) {
+            gameUI_->draw(*gameState_);
+            std::string msg = "You win! Congratulations!\n\tYour score: " +
+                              std::to_string(gameState_->getScore());
+            gameUI_->displayMessage(msg);
+            std::this_thread::sleep_for(4s);
+            isGameContinuing_ = false;
           }
           else {
             gameUI_->draw(*gameState_);
@@ -197,49 +204,70 @@ namespace pacman
   void Game::handlePacmanControl()
   {
     while (true) {
-      unsigned char keypressed = _getch();
-      switch (keypressed) {
-        case ENG_W_CAPITAL:
-        case ENG_W_LOWERCASE:
-        case RUS_W_CAPITAL:
-        case RUS_W_LOWERCASE:
-          isPaused_ = false;
-          changedPacmanDirectionEvent_.notify(direction::UP);
-          break;
-
-        case ENG_S_CAPITAL:
-        case ENG_S_LOWERCASE:
-        case RUS_S_CAPITAL:
-        case RUS_S_LOWERCASE:
-          isPaused_ = false;
-          changedPacmanDirectionEvent_.notify(direction::DOWN);
-          break;
-
-        case ENG_A_CAPITAL:
-        case ENG_A_LOWERCASE:
-        case RUS_A_CAPITAL:
-        case RUS_A_LOWERCASE:
-          isPaused_ = false;
-          changedPacmanDirectionEvent_.notify(direction::LEFT);
-          break;
-
-        case ENG_D_CAPITAL:
-        case ENG_D_LOWERCASE:
-        case RUS_D_CAPITAL:
-        case RUS_D_LOWERCASE:
-          isPaused_ = false;
-          changedPacmanDirectionEvent_.notify(direction::RIGHT);
-          break;
-
-        case ENG_P_CAPITAL:
-        case ENG_P_LOWERCASE:
-        case RUS_P_CAPITAL:
-        case RUS_P_LOWERCASE:
-          isPaused_ = !isPaused_;
-          break;
+      if (!isGameContinuing_) {
+        std::this_thread::sleep_for(1s);
       }
-    }
-  }
+      else {
+        unsigned char keypressed = _getch();
+        switch (keypressed) {
+          case ENG_W_CAPITAL:
+          case ENG_W_LOWERCASE:
+          case RUS_W_CAPITAL:
+          case RUS_W_LOWERCASE:
+            isPaused_ = false;
+            changedPacmanDirectionEvent_.notify(direction::UP);
+            break;
+
+          case ENG_S_CAPITAL:
+          case ENG_S_LOWERCASE:
+          case RUS_S_CAPITAL:
+          case RUS_S_LOWERCASE:
+            isPaused_ = false;
+            changedPacmanDirectionEvent_.notify(direction::DOWN);
+            break;
+
+          case ENG_A_CAPITAL:
+          case ENG_A_LOWERCASE:
+          case RUS_A_CAPITAL:
+          case RUS_A_LOWERCASE:
+            isPaused_ = false;
+            changedPacmanDirectionEvent_.notify(direction::LEFT);
+            break;
+
+          case ENG_D_CAPITAL:
+          case ENG_D_LOWERCASE:
+          case RUS_D_CAPITAL:
+          case RUS_D_LOWERCASE:
+            isPaused_ = false;
+            changedPacmanDirectionEvent_.notify(direction::RIGHT);
+            break;
+
+          case ENG_P_CAPITAL:
+          case ENG_P_LOWERCASE:
+          case RUS_P_CAPITAL:
+          case RUS_P_LOWERCASE:
+            isPaused_ = !isPaused_;
+            break;
+
+          case '*':
+            gameState_->level_ = maxLevel_;
+            break;
+          case '@':
+            int rows = gameState_->getMaze()->getRows();
+            int columns = gameState_->getMaze()->getColumns();
+            for (int i = 0; i < columns; i++) {
+              for (int j = 0; j < rows; j++) {
+                Point pt(i, j);
+                gameState_->maze_->setFood(pt, food::EMPTY);
+              }
+            }
+            break;
+        } // switch
+
+      } // if(isGameContinuing_)
+    } // while(true)
+      
+  } // void handlePacmanControl
 
 
 }

@@ -23,6 +23,7 @@ namespace pacman
 
       void setFood(const Point cell, food food);
       void resetFood();
+      void resetGameState();
 
       const bool isCellFree(const Point& cell) const;
       const bool isPossibleMove(const Point& cell, direction direction) const;
@@ -39,6 +40,8 @@ namespace pacman
       int score_;
       int lives_;
       int level_;
+
+      const int startLives_ = 3;
 
       const bool isAjacentCellFree(const Point& cell, direction direction) const;
       const Point getAdjacentCell(const Point& cell, direction direction) const;

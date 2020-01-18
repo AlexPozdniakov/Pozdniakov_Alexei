@@ -33,7 +33,8 @@ namespace pacman
       GameState* gameState_;
       GameUI* gameUI_;
       bool isPaused_;
-
+      bool isGameContinuing_;
+      int maxLevel_;
       int pointsForDot_;
       int pointsForEnergizer_;
 

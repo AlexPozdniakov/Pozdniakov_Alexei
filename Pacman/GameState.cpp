@@ -6,7 +6,7 @@ namespace pacman
   GameState::GameState() : pacman_(*this)
   {
     maze_ = new Maze();
-    lives_ = 3;
+    lives_ = startLives_;
     score_ = 0;
     level_ = 1;
 
@@ -177,6 +177,17 @@ namespace pacman
   void GameState::resetFood()
   {
     maze_->resetFood();
+  }
+
+
+
+  void GameState::resetGameState()
+  {
+    setPacmanStartPosition();
+    resetFood();
+    score_ = 0;
+    level_ = 1;
+    lives_ = startLives_;
   }
 
 }
